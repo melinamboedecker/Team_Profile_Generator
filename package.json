@@ -1,0 +1,23 @@
+{
+  "name": "team_profile_generator",
+  "version": "1.0.0",
+  "description": "Node.js command-line application that accepts information about employees  and creates an HTML webpage containing summaries for each team member.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/melinamboedecker/Team_Profile_Generator.git"
+  },
+  "author": "Melina Boedecker",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/melinamboedecker/Team_Profile_Generator/issues"
+  },
+  "homepage": "https://github.com/melinamboedecker/Team_Profile_Generator#readme",
+  "dependencies": {
+    "inquirer": "^8.1.0",
+    "jest": "^27.0.3"
+  }
+}
