@@ -46,12 +46,12 @@ const engineerQuestions = [
     {
         type: 'input',
         name: 'engineerid',
-        message: "Enter the Team Manager's employee ID",
+        message: "Enter the Engineer's employee ID",
     },
     {
         type: 'input',
         name: 'engineeremail',
-        message: "Enter the Team Manager's email address",
+        message: "Enter the Engineer's email address",
     },
     {
         type: 'input',
@@ -64,12 +64,12 @@ const internQuestions = [
     {
         type: 'input',
         name: 'internName',
-        message: "Enter the Engineer's name",
+        message: "Enter the Intern's name",
     },
     {
         type: 'input',
         name: 'internid',
-        message: "Enter the Team Manager's employee ID",
+        message: "Enter the Intern's employee ID",
     },
     {
         type: 'input',
