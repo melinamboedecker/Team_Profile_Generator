@@ -9,18 +9,28 @@ const Intern = require('./lib/Intern.js');
 //array for all team members
 const teamMemberArray = [];
 
+const startQuestion = [
+    {
+        type: 'confirm',
+        name: 'start',
+        message: "Here will be the verbiage at the start of the app explaining what it will do"
+    },
+]
+
 //questions for user input
 const mgrQuestions = [
     {
         type: 'input',
         name: 'name',
         message: "Enter the Team Manager's name",
-        validate: val => /[a-zA-z]/gi.test(val),  
+        // validate: val => /[a-zA-z]/gi.test(val),  
+        // validate: val => /[a-zA-z]/,
     },
     {
-        type: 'input',
+        type: 'number',
         name: 'id',
         message: "Enter the Team Manager's employee ID",
+        validate: val => /[0-9]/,
     },
     {
         type: 'input',
@@ -122,6 +132,16 @@ const internQuestions = [
     }
 ]
 
+function start() {
+    return inquirer
+        .prompt(startQuestion)
+        .then(startdata => {
+            if (startdata.start) {
+                enterManager();
+            }
+        })
+}
+
 function enterManager() {
     return inquirer
         .prompt(mgrQuestions)
@@ -180,4 +200,4 @@ function createHtml() {
 
 
 
-enterManager();
+start();
