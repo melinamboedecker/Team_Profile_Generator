@@ -4,7 +4,7 @@
   "description": "Node.js command-line application that accepts information about employees  and creates an HTML webpage containing summaries for each team member.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,6 @@
   "homepage": "https://github.com/melinamboedecker/Team_Profile_Generator#readme",
   "dependencies": {
     "inquirer": "^8.1.0",
-    "jest": "^27.0.3"
+    "jest": "^27.0.4"
   }
 }

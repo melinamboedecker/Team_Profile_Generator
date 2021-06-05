@@ -23,25 +23,33 @@ const mgrQuestions = [
         type: 'input',
         name: 'name',
         message: "Enter the Team Manager's name",
+        validate(value) {
+            // const valid = (value.split(' ').join('')).match( /^[A-Za-z]+$/);
+            const valid = value.match(/^[A-Za-z]+$/);
+            return valid || 'Please enter name with letters only'
+        },
         // validate: val => /[a-zA-z]/gi.test(val),  
         // validate: val => /[a-zA-z]/,
     },
     {
-        type: 'number',
+        type: 'input',
         name: 'id',
         message: "Enter the Team Manager's employee ID",
-        validate: val => /[0-9]/,
+        validate(value) {
+            const valid = !isNaN(parseFloat(value));
+            return valid || 'Please enter a number'
+        },
+        filter: Number,
     },
     {
         type: 'input',
         name: 'email',
         message: "Enter the Team Manager's email address",
         validate(value) {
-            const okay = value.includes('@') && value.includes('.');
-            if (okay) {
+            const valid = value.includes('@') && value.includes('.');
+            if (valid) {
                 return true;
             }
-
             return "Please enter a valid email address"
         } 
     },
