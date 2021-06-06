@@ -1,0 +1,21 @@
+html {
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background-color: rgb(201, 199, 199);
+    display: block;
+  }
+
+  main {
+      display: block;   
+  } 
+
+  header {
+    padding: 0.2% 1%;
+    background-color: rgb(51, 55, 94);
+    color: rgb(205, 213, 248);
+    text-align: center;
+  }

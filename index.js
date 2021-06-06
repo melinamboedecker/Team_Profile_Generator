@@ -1,5 +1,6 @@
 //packages needed for this application
 const fs = require('fs');
+// const path = require('path');
 const inquirer = require('inquirer');
 const Employee = require('./lib/Employee.js');
 const Manager = require('./lib/Manager.js');
@@ -13,7 +14,7 @@ const startQuestion = [
     {
         type: 'confirm',
         name: 'start',
-        message: "Here will be the verbiage at the start of the app explaining what it will do"
+        message: "This is a Team Profile generator. You will be prompted with a series of questions about the members of your team, and then the pertinent information will be populated into an html file you can use to display the contact information for your team. Do you wish to continue with this application?"
     },
 ]
 
@@ -23,11 +24,12 @@ const mgrQuestions = [
         type: 'input',
         name: 'name',
         message: "Enter the Team Manager's name",
-        validate(value) {
-            // const valid = (value.split(' ').join('')).match( /^[A-Za-z]+$/);
-            const valid = value.match(/^[A-Za-z]+$/);
-            return valid || 'Please enter name with letters only'
-        },
+        // validate(entry) {
+        //     // const valid = (value.split(' ').join('')).match( /^[A-Za-z]+$/);
+        //     const letters = /^[A-Za-z]+$/;
+        //     const valid = entry.value.match(letters);
+        //     return valid || 'Please enter name with letters only'
+        // },
         // validate: val => /[a-zA-z]/gi.test(val),  
         // validate: val => /[a-zA-z]/,
     },
@@ -162,7 +164,7 @@ function enterManager() {
             } else if (mgrdata.whatNext === 'Enter an Engineer') {
                 enterEngineer();
             } else {
-                createHtml();
+                createHtml(teamMemberArray);
             }
         });
 }
@@ -179,7 +181,7 @@ function enterEngineer() {
             } else if (engdata.whatNext === 'Enter an Intern') {
                 enterIntern();
             } else {
-                createHtml();
+                createHtml(teamMemberArray);
             }
         })
 }
@@ -196,14 +198,32 @@ function enterIntern() {
             } else if (data.whatNext === 'Enter an Engineer') {
                 enterEngineer();
             } else {
-                createHtml();
+                createHtml(teamMemberArray);
             }
         })
 }
 
-function createHtml() {
-    console.log('go make html file')
+function createHtml(teamMemberArray) {
+    
     console.log(teamMemberArray)
+    console.log(teamMemberArray[0].name)
+
+    for (var i = 0; i < teamMemberArray.length; i++) {
+        console.log(teamMemberArray[i].name)
+        console.log(teamMemberArray[i].id)
+        console.log(teamMemberArray[i].email)
+        console.log(teamMemberArray[i].getRole());
+    }
+    
+    const filename = './dist/myteam.html'
+
+    fs.writeFile(filename, 
+        fs.readFileSync('dist/test.html')
+        
+        , (err) =>
+       err ? console.log(err) : console.log('HTML file for your team has been created')
+        );
+
 }
 
 
