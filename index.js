@@ -6,6 +6,7 @@ const Employee = require('./lib/Employee.js');
 const Manager = require('./lib/Manager.js');
 const Engineer = require('./lib/Engineer.js');
 const Intern = require('./lib/Intern.js');
+const render = require("./src/HtmlGenerator.js")
 
 //array for all team members
 const teamMemberArray = [];
@@ -208,17 +209,19 @@ function createHtml(teamMemberArray) {
     console.log(teamMemberArray)
     console.log(teamMemberArray[0].name)
 
-    for (var i = 0; i < teamMemberArray.length; i++) {
-        console.log(teamMemberArray[i].name)
-        console.log(teamMemberArray[i].id)
-        console.log(teamMemberArray[i].email)
-        console.log(teamMemberArray[i].getRole());
-    }
+    // for (var i = 0; i < teamMemberArray.length; i++) {
+    //     console.log(teamMemberArray[i].name)
+    //     console.log(teamMemberArray[i].id)
+    //     console.log(teamMemberArray[i].email)
+    //     console.log(teamMemberArray[i].getRole())
+    // }
     
     const filename = './dist/myteam.html'
 
     fs.writeFile(filename, 
-        fs.readFileSync('dist/test.html')
+        render(teamMemberArray)
+        // fs.readFileSync('src/template.html')+'\n'+
+        // fs.readFileSync('src/manager.html')
         
         , (err) =>
        err ? console.log(err) : console.log('HTML file for your team has been created')

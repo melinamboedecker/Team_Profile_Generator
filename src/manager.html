@@ -1,11 +1,15 @@
-<div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">{{name}}</h5>
-      <h6 class="card-title"><i class="fas fa-mug-hot mr-2"></i>Manager</h6>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">ID: <span id="getid">{{id}}</span></li>
-        <li class="list-group-item">Email: <span id="getemail"><a href="mailto:{{ email }}">{{ email }}</a></span></li>
-        <li class="list-group-item"><span id="extratitle">Office Number: </span><span id="extra">{{officeNumber}}</span></li>
-      </ul>
+<div class="row">
+    <div class="card-deck">
+        <div class="card mx-auto m-1" style="width: 18rem;">
+            <div class="card-body">
+            <h5 class="card-title">{{ name }}</h5>
+            <h6 class="card-title"><i class="fas fa-mug-hot mr-2"></i>Manager</h6>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">ID: <span id="getid">{{ id }}</span></li>
+                <li class="list-group-item">Email: <span id="getemail"><a href="mailto:{{ email }}">{{ email }}</a></span></li>
+                <li class="list-group-item"><span id="extratitle">Office Number: </span><span id="extra">{{ officeNumber }}</span></li>
+            </ul>
+            </div>
+        </div>
     </div>
 </div>
