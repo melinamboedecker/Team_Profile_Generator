@@ -206,23 +206,10 @@ function enterIntern() {
 
 function createHtml(teamMemberArray) {
     
-    console.log(teamMemberArray)
-    console.log(teamMemberArray[0].name)
-
-    // for (var i = 0; i < teamMemberArray.length; i++) {
-    //     console.log(teamMemberArray[i].name)
-    //     console.log(teamMemberArray[i].id)
-    //     console.log(teamMemberArray[i].email)
-    //     console.log(teamMemberArray[i].getRole())
-    // }
-    
     const filename = './dist/myteam.html'
 
     fs.writeFile(filename, 
         render(teamMemberArray)
-        // fs.readFileSync('src/template.html')+'\n'+
-        // fs.readFileSync('src/manager.html')
-        
         , (err) =>
        err ? console.log(err) : console.log('HTML file for your team has been created')
         );
