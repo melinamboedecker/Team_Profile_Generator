@@ -1,12 +1,13 @@
-//packages needed for this application
+//packages and files needed for this application
 const fs = require('fs');
-// const path = require('path');
 const inquirer = require('inquirer');
+const chalk = require('chalk');
 const Employee = require('./lib/Employee.js');
 const Manager = require('./lib/Manager.js');
 const Engineer = require('./lib/Engineer.js');
 const Intern = require('./lib/Intern.js');
 const render = require("./src/HtmlGenerator.js")
+const validate = require('./lib/Validate.js')
 
 //array for all team members
 const teamMemberArray = [];
@@ -25,41 +26,33 @@ const mgrQuestions = [
         type: 'input',
         name: 'name',
         message: "Enter the Team Manager's name",
-        // validate(entry) {
-        //     // const valid = (value.split(' ').join('')).match( /^[A-Za-z]+$/);
-        //     const letters = /^[A-Za-z]+$/;
-        //     const valid = entry.value.match(letters);
-        //     return valid || 'Please enter name with letters only'
-        // },
-        // validate: val => /[a-zA-z]/gi.test(val),  
-        // validate: val => /[a-zA-z]/,
+       
     },
     {
         type: 'input',
         name: 'id',
         message: "Enter the Team Manager's employee ID",
-        validate(value) {
-            const valid = !isNaN(parseFloat(value));
-            return valid || 'Please enter a number'
-        },
-        filter: Number,
+        idInput: true,
     },
     {
         type: 'input',
         name: 'email',
         message: "Enter the Team Manager's email address",
-        validate(value) {
-            const valid = value.includes('@') && value.includes('.');
-            if (valid) {
-                return true;
-            }
-            return "Please enter a valid email address"
-        } 
+        emailInput: true,
     },
     {
         type: 'input',
         name: 'officenumber',
         message: "Enter the Team Manager's office number",
+        phoneNumberInput: true,
+        // validate: function( value ) {
+        //     var pass = value.match(/^([01]{1})?[\-\.\s]?\(?(\d{3})\)?[\-\.\s]?(\d{3})[\-\.\s]?(\d{4})\s?((?:#|ext\.?\s?|x\.?\s?){1}(?:\d+)?)?$/i);
+        //     if (pass) {
+        //     return true;
+        //     } else {
+        //     return "Please enter a valid phone number";
+        //      }
+        //     }
     },
     {
         type: 'list',
@@ -68,6 +61,7 @@ const mgrQuestions = [
         choices: ['Enter an Engineer', 'Enter an Intern', 'Finished entering personnel, build my team profile'],
     }
 ]
+mgrQuestions.forEach(el => el.validate = validate.bind(el));
 
 const engineerQuestions = [
     {
@@ -79,19 +73,21 @@ const engineerQuestions = [
         type: 'input',
         name: 'id',
         message: "Enter the Engineer's employee ID",
+        idInput: true,
     },
     {
         type: 'input',
         name: 'email',
         message: "Enter the Engineer's email address",
-        validate(value) {
-            const okay = value.includes('@') && value.includes('.');
-            if (okay) {
-                return true;
-            }
+        emailInput: true,
+        // validate(value) {
+        //     const okay = value.includes('@') && value.includes('.');
+        //     if (okay) {
+        //         return true;
+        //     }
 
-            return "Please enter a valid email address"
-        } 
+        //     return "Please enter a valid email address"
+        // } 
     },
     {
         type: 'input',
@@ -105,6 +101,7 @@ const engineerQuestions = [
         choices: ['Enter another Engineer', 'Enter an Intern', 'Finished entering personnel, build my team profile'],
     }
 ]
+engineerQuestions.forEach(el => el.validate = validate.bind(el));
 
 const internQuestions = [
     {
@@ -116,19 +113,13 @@ const internQuestions = [
         type: 'input',
         name: 'id',
         message: "Enter the Intern's employee ID",
+        idInput: true,
     },
     {
         type: 'input',
         name: 'email',
         message: "Enter the Intern's email address",
-        validate(value) {
-            const okay = value.includes('@') && value.includes('.');
-            if (okay) {
-                return true;
-            }
-
-            return "Please enter a valid email address"
-        } 
+        emailInput: true,
     },
     {
         type: 'input',
@@ -142,6 +133,7 @@ const internQuestions = [
         choices: ['Enter another Intern', 'Enter an Engineer', 'Finished entering personnel, build my team profile'],
     }
 ]
+internQuestions.forEach(el => el.validate = validate.bind(el));
 
 function start() {
     return inquirer
@@ -159,7 +151,6 @@ function enterManager() {
         .then(mgrdata => {
             const userManager = new Manager (mgrdata.name, mgrdata.id, mgrdata.email, mgrdata.officenumber)
             teamMemberArray.push(userManager)
-            console.log(userManager);
             if (mgrdata.whatNext === 'Enter an Intern') {
                 enterIntern();
             } else if (mgrdata.whatNext === 'Enter an Engineer') {
@@ -176,7 +167,6 @@ function enterEngineer() {
         .then(engdata => {
             const userEngineer = new Engineer (engdata.name, engdata.id, engdata.email, engdata.github)
             teamMemberArray.push(userEngineer)
-            console.log(userEngineer);
             if (engdata.whatNext === 'Enter another Engineer') {
                 enterEngineer();
             } else if (engdata.whatNext === 'Enter an Intern') {
@@ -193,7 +183,6 @@ function enterIntern() {
         .then(data => {
             const userIntern = new Intern (data.name, data.id, data.email, data.school)
             teamMemberArray.push(userIntern)
-            console.log(userIntern);
             if (data.whatNext === 'Enter another Intern') {
                 enterIntern();
             } else if (data.whatNext === 'Enter an Engineer') {
@@ -211,7 +200,7 @@ function createHtml(teamMemberArray) {
     fs.writeFile(filename, 
         render(teamMemberArray)
         , (err) =>
-       err ? console.log(err) : console.log('HTML file for your team has been created')
+       err ? console.log(chalk.red(err)) : console.log(chalk.green('----------------------------------------\nHTML file for your team has been created\ngo to '+filename+'\n----------------------------------------'))
         );
 
 }
