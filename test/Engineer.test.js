@@ -1,6 +1,6 @@
 const Engineer = require('../lib/Engineer.js');
 
-describe("Engineer class", () => {
+describe("Engineer subclass", () => {
     it("Creates new instance of Engineer subclass", () => {
         const obj = new Engineer();
         expect(typeof obj).toEqual('object');

@@ -14,6 +14,9 @@ Run npm install from the main folder in your bash terminal to install dependenci
 ## Usage: 
 Run node index.js from the main folder in the command line of your bash terminal to start the application. Answer all the prompts, then when finished you will find your html file in the dist folder.
 
+![Screenshot](Images/TeamProfileGeneratorVideo.gif)
+
+![Screenshot](Images/TeamProfileGeneratorScreenshot.png)
 
 ## License: 
 Licensed under the [MIT](https://opensource.org/licenses/MIT) license. 
