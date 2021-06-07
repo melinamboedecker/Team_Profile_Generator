@@ -12,6 +12,7 @@ const validate = require('./lib/Validate.js')
 //array for all team members
 const teamMemberArray = [];
 
+//initial question that explains app
 const startQuestion = [
     {
         type: 'confirm',
@@ -20,7 +21,7 @@ const startQuestion = [
     },
 ]
 
-//questions for user input
+//questions for user input of manager info
 const mgrQuestions = [
     {
         type: 'input',
@@ -61,6 +62,7 @@ const mgrQuestions = [
         choices: ['Enter an Engineer', 'Enter an Intern', 'Finished entering personnel, build my team profile'],
     }
 ]
+//run validate function for each manager question
 mgrQuestions.forEach(el => el.validate = validate.bind(el));
 
 const engineerQuestions = [
@@ -101,6 +103,7 @@ const engineerQuestions = [
         choices: ['Enter another Engineer', 'Enter an Intern', 'Finished entering personnel, build my team profile'],
     }
 ]
+//run validate function for each engineer question
 engineerQuestions.forEach(el => el.validate = validate.bind(el));
 
 const internQuestions = [
@@ -133,8 +136,10 @@ const internQuestions = [
         choices: ['Enter another Intern', 'Enter an Engineer', 'Finished entering personnel, build my team profile'],
     }
 ]
+//run validate function for each intern question
 internQuestions.forEach(el => el.validate = validate.bind(el));
 
+//initiates first question, then goes to enterManager function if "yes" inputted
 function start() {
     return inquirer
         .prompt(startQuestion)
@@ -145,6 +150,8 @@ function start() {
         })
 }
 
+//runs manager questions, adds manager to teamMemberArray, then checks if Intern or Engineer to be entered
+//or else generates html file
 function enterManager() {
     return inquirer
         .prompt(mgrQuestions)
@@ -161,6 +168,8 @@ function enterManager() {
         });
 }
 
+//runs engineer questions, adds new engineer to teamMemberArray, then checks if another Engineer or Intern to be added
+//or generates html file
 function enterEngineer() {
     return inquirer 
         .prompt(engineerQuestions)
@@ -177,6 +186,8 @@ function enterEngineer() {
         })
 }
 
+//runs intern questions, adds new intern to teamMemberArray, then checks if another intern or engineer to be added
+//or generates html file
 function enterIntern() {
     return inquirer 
         .prompt(internQuestions)
@@ -193,6 +204,7 @@ function enterIntern() {
         })
 }
 
+//html file generates using templates in src folder
 function createHtml(teamMemberArray) {
     
     const filename = './dist/myteam.html'
